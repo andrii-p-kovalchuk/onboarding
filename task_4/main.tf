@@ -2,12 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_availability_zones" "available" {
-#   filter {
-#     name   = "opt-in-status"
-#     values = ["opt-in-not-required"]
-#   }
-}
+data "aws_availability_zones" "available" {}
 
 locals {
   cluster_name = "education-eks-${random_string.suffix.result}"
@@ -91,7 +86,6 @@ module "eks" {
 }
 
 
-# https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/ 
 data "aws_iam_policy" "ebs_csi_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
 }
